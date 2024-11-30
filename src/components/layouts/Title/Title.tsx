@@ -7,10 +7,10 @@ interface TitleTypes {
 
 const Title = ({ children, title }: TitleTypes) => {
   return (
-    <>
-      <div>{title}</div>
-      <div>{children}</div>
-    </>
+    <div className="gap-4">
+      <p className="max-w-screen-md text-center text-6xl font-bold">{title}</p>
+      <>{children}</>
+    </div>
   );
 };
 
