@@ -1,11 +1,14 @@
 import "./App.css";
-import { Button } from "@/components/ui/button";
+import LP from "./pages/LP";
 
 function App() {
   return (
-    <div>
-      <Button>Click me</Button>
-    </div>
+    <>
+      <div className="h-14"></div>
+      <div>
+        <LP />
+      </div>
+    </>
   );
 }
 
