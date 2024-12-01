@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LP from "./pages/LP";
-import Analysis from "./pages/Analysis";
+import Estimate from "./pages/Analysis";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<LP />} />
-              <Route path="/analysis" element={<Analysis />} />
+              <Route path="/estimate" element={<Estimate />} />
             </Routes>
           </BrowserRouter>
         </div>

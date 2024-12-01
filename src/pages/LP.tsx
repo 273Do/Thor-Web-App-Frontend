@@ -13,7 +13,7 @@ const LP = () => {
             Thorはスマートフォンで計測されたアクティビティデータのみを用いて、
           </p>
           <p>睡眠状態を推定するシステムです。</p>
-          <Link to="/analysis">
+          <Link to="/estimate">
             <Button className="mt-4 w-52 bg-primary-gradient transition-all duration-100 hover:opacity-80">
               始める
             </Button>
