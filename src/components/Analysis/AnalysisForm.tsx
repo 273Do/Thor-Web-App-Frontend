@@ -205,7 +205,7 @@ const AnalysisForm = () => {
               />
               <Button
                 type="submit"
-                className="w-full bg-primary-gradient transition-all duration-100 hover:opacity-80"
+                className="w-full bg-primary-gradient text-white transition-all duration-100 hover:opacity-80"
               >
                 推定を行う
               </Button>
