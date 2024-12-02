@@ -4,8 +4,51 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
+import demo_data from "../../../public/test_data/demo";
+import { useEffect, useState } from "react";
+import { processData, Section } from "@/functions/data-format";
+import { Button } from "../ui/button";
+
+type ResultType = {
+  formattedData: Section[];
+};
 
 const Feedback = () => {
+  const [data, setData] = useState<ResultType>({
+    formattedData: [],
+  });
+  const [selectedTitle, setSelectedTitle] = useState<string>("");
+  const [content, setContent] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await processData(demo_data);
+      setData(result);
+
+      const firstTitle = result.formattedData[0].content[0].title;
+      setSelectedTitle(firstTitle);
+
+      console.log(result);
+    };
+    fetchData();
+  }, []);
+
+  // 指定タイトルのコンテンツを検索
+  useEffect(() => {
+    const findContentByTitle = (title: string): string | null => {
+      for (const section of data.formattedData) {
+        const found = section.content.find((item) => item.title === title);
+        if (found) {
+          return found.content; // コンテンツを返す
+        }
+      }
+      return null; // 該当なし
+    };
+
+    const result = findContentByTitle(selectedTitle);
+    setContent(result);
+  }, [selectedTitle, data]);
+
   return (
     <>
       <Card className="w-[600px] max-w-3xl">
@@ -15,15 +58,32 @@ const Feedback = () => {
         <div className="h-px w-full bg-border"></div>
         <ResizablePanelGroup direction="horizontal">
           <ResizablePanel defaultSize={25}>
-            <div className="m-6">One</div>
+            <div className="m-6 ">
+              {/* sectionとtitleを抽出 */}
+              {data.formattedData.map((item_s, i) => (
+                <>
+                  <div className="text-sm text-muted-foreground" key={i}>
+                    {item_s.section}
+                  </div>
+                  {item_s.content.map((item_t, j) => (
+                    <>
+                      <Button
+                        variant={"ghost"}
+                        key={j}
+                        onClick={() => setSelectedTitle(item_t.title)}
+                      >
+                        {item_t.title}
+                      </Button>
+                    </>
+                  ))}
+                </>
+              ))}
+            </div>
           </ResizablePanel>
           <ResizableHandle withHandle />
           <ResizablePanel>
-            <p className="m-3 mx-6 text-xl font-bold">睡眠パターン</p>
-            <div className="m-3 mx-6">
-              多くの場合、就寝時間が深夜2時を超えることが多く、特に3時を超える日もあります。例えば、2024年1月8日には就寝時間が午前3時59分と非常に遅く、また、2024年2月3日にも午前4時50分に就寝しています。平均的な睡眠時間は7時間前後ですが、何日かは睡眠時間が5時間以下と短い日もあります（例:
-              2024年1月31日の睡眠時間は4時間57分、2024年2月3日は4時間42分）。全般的に、夜更かしに伴い不規則な睡眠パターンが見られます。
-            </div>
+            <p className="m-6 mb-3 text-xl font-bold">{selectedTitle}</p>
+            <div className="m-6 mt-3 min-w-[400px]">{content}</div>
           </ResizablePanel>
         </ResizablePanelGroup>
         <div className="mb-6 h-px w-full bg-border"></div>
