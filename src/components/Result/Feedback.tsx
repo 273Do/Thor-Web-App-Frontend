@@ -62,13 +62,18 @@ const Feedback = () => {
               {/* sectionとtitleを抽出 */}
               {data.formattedData.map((item_s, i) => (
                 <>
-                  <div className="text-sm text-muted-foreground" key={i}>
+                  <div className="m-1 text-xs text-muted-foreground" key={i}>
                     {item_s.section}
                   </div>
                   {item_s.content.map((item_t, j) => (
                     <>
                       <Button
-                        variant={"ghost"}
+                        variant="ghost"
+                        className={`${
+                          selectedTitle === item_t.title
+                            ? "bg-primary-gradient text-white hover:text-white"
+                            : ""
+                        } m-1`}
                         key={j}
                         onClick={() => setSelectedTitle(item_t.title)}
                       >

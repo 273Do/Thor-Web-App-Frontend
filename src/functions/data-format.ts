@@ -17,7 +17,8 @@ async function processData(data: string) {
   lines.forEach((line: string) => {
     if (line.startsWith("# ")) {
       // セクション (# のみ)
-      currentSection = line.slice(2).trim();
+      // currentSection = line.slice(2).trim();
+      currentSection = line;
       currentTitle = null;
 
       // セクションが未登録なら追加
@@ -31,7 +32,8 @@ async function processData(data: string) {
       }
     } else if (line.startsWith("## ")) {
       // タイトル (##)
-      currentTitle = line.slice(3).trim();
+      // currentTitle = line.slice(3).trim();
+      currentTitle = line;
     } else if (line.trim()) {
       // フォーマット後のデータを該当セクションに追加
       const section = formattedData.find((s) => s.section === currentSection);
