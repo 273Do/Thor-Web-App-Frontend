@@ -4,17 +4,21 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import { demo_data } from "../../../public/test_data/demo";
 import { useEffect, useState } from "react";
 import { processData, Section } from "@/functions/data-format";
 import { Button } from "../ui/button";
-import { Chart } from ".";
+import Chart from "./Chart";
 
 type ResultType = {
   formattedData: Section[];
 };
 
-const Feedback = () => {
+type AnalysisData = {
+  feedback: string;
+};
+
+const Feedback = ({ analysis_data }: { analysis_data: AnalysisData }) => {
+  const { feedback } = analysis_data;
   const [data, setData] = useState<ResultType>({
     formattedData: [],
   });
@@ -23,7 +27,7 @@ const Feedback = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await processData(demo_data);
+      const result = await processData(feedback);
       setData(result);
 
       const firstTitle = result.formattedData[0].content[0].title;
