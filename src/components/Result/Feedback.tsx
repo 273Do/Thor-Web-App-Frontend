@@ -1,13 +1,14 @@
-import { Card, CardFooter, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import demo_data from "../../../public/test_data/demo";
+import { demo_data } from "../../../public/test_data/demo";
 import { useEffect, useState } from "react";
 import { processData, Section } from "@/functions/data-format";
 import { Button } from "../ui/button";
+import { Chart } from ".";
 
 type ResultType = {
   formattedData: Section[];
@@ -91,8 +92,15 @@ const Feedback = () => {
             <div className="m-6 mt-3 min-w-[400px]">{content}</div>
           </ResizablePanel>
         </ResizablePanelGroup>
-        <div className="mb-6 h-px w-full bg-border"></div>
-        <CardFooter>グラフ</CardFooter>
+        <div className="h-px w-full bg-border"></div>
+        <CardTitle className="p-6 pb-3 text-xl">
+          就寝・起床時刻チャート
+        </CardTitle>
+        <CardContent>
+          <div className="w-full">
+            <Chart />
+          </div>
+        </CardContent>
       </Card>
     </>
   );
