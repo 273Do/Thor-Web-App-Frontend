@@ -38,7 +38,7 @@ function fetchPosts() {
 // DEBUG: デバッグ用
 
 const ResultPage = () => {
-  const analysis_data = fetchPosts()();
+  const estimate_data = fetchPosts()();
 
   return (
     <>
@@ -46,7 +46,7 @@ const ResultPage = () => {
         <ResultTitle />
       </Layout.Title>
       <Layout.Content>
-        <Feedback analysis_data={analysis_data} />
+        <Feedback estimate_data={estimate_data} />
       </Layout.Content>
     </>
   );

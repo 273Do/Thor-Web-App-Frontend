@@ -5,20 +5,13 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { useEffect, useState } from "react";
-import { processData, Section } from "@/functions/data-format";
+import { processData } from "@/functions/data-format";
 import { Button } from "../ui/button";
 import Chart from "./Chart";
+import { EstimateData, ResultType } from "./types";
 
-type ResultType = {
-  formattedData: Section[];
-};
-
-type AnalysisData = {
-  feedback: string;
-};
-
-const Feedback = ({ analysis_data }: { analysis_data: AnalysisData }) => {
-  const { feedback } = analysis_data;
+const Feedback = ({ estimate_data }: { estimate_data: EstimateData }) => {
+  const { feedback } = estimate_data;
   const [data, setData] = useState<ResultType>({
     formattedData: [],
   });
