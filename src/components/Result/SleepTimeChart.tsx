@@ -1,4 +1,12 @@
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Line,
+  LineChart,
+} from "recharts";
 import {
   ChartConfig,
   ChartContainer,
@@ -13,7 +21,7 @@ import { convertToHours } from "@/functions/time-format";
 
 const chartConfig: ChartConfig = {
   睡眠時間: {
-    label: "睡眠時間(h)",
+    label: "睡眠時間(h)　",
     // color: "#2563eb",
   },
 };
@@ -27,7 +35,7 @@ export default function SleepTimeChart({ data }: { data: EstimateDataType }) {
 
   return (
     <ChartContainer config={chartConfig} className="min-h-[200px] w-full ">
-      <BarChart accessibilityLayer data={transformedData}>
+      {/* <BarChart accessibilityLayer data={transformedData}>
         <CartesianGrid vertical={false} />
         <XAxis
           dataKey="date"
@@ -37,9 +45,38 @@ export default function SleepTimeChart({ data }: { data: EstimateDataType }) {
           tickFormatter={(value: string) => value.slice(5, 10)}
         />
         <ChartTooltip content={<ChartTooltipContent indicator={"line"} />} />
-        {/* <ChartLegend content={<ChartLegendContent />} /> */}
+        <ChartLegend content={<ChartLegendContent />} />
         <Bar dataKey="睡眠時間" fill="var(--primary-gr-l)" radius={4} />
-      </BarChart>
+      </BarChart> */}
+      <LineChart
+        accessibilityLayer
+        data={transformedData}
+        margin={{
+          left: 12,
+          right: 12,
+        }}
+      >
+        <CartesianGrid vertical={false} />
+        <XAxis
+          dataKey="date"
+          tickLine={false}
+          axisLine={false}
+          tickMargin={8}
+          tickFormatter={(value: string) => value.slice(5, 10)}
+        />
+        <YAxis axisLine={false} tickLine={false} />
+        <ChartTooltip
+          cursor={true}
+          content={<ChartTooltipContent indicator={"dot"} />}
+        />
+        <Line
+          dataKey="睡眠時間"
+          type="monotone"
+          stroke="var(--primary-gr-l)"
+          strokeWidth={2}
+          dot={false}
+        />
+      </LineChart>
     </ChartContainer>
   );
 }

@@ -9,10 +9,12 @@ import { processData } from "@/functions/data-format";
 import { Button } from "../ui/button";
 import { FormattedType, ResultType } from "./types";
 import SleepTimeChart from "./SleepTimeChart";
+import SleepDurationChart from "./Testchart";
+import SleepPatternChart from "./Testchart";
 
 const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
   const { feedback, result } = estimate_data;
-  console.log(estimate_data.result);
+  console.log(result);
   const [data, setData] = useState<FormattedType>({
     formattedData: [],
   });
@@ -60,12 +62,12 @@ const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
             <div className="m-6 ">
               {/* sectionとtitleを抽出 */}
               {data.formattedData.map((item_s, i) => (
-                <>
-                  <div className="m-1 text-xs text-muted-foreground" key={i}>
+                <div key={i}>
+                  <div className="m-1 text-xs text-muted-foreground">
                     {item_s.section}
                   </div>
                   {item_s.content.map((item_t, j) => (
-                    <>
+                    <div key={j}>
                       <Button
                         variant="ghost"
                         className={`${
@@ -73,14 +75,13 @@ const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
                             ? "bg-primary-gradient text-white hover:text-white"
                             : ""
                         } m-1`}
-                        key={j}
                         onClick={() => setSelectedTitle(item_t.title)}
                       >
                         {item_t.title}
                       </Button>
-                    </>
+                    </div>
                   ))}
-                </>
+                </div>
               ))}
             </div>
           </ResizablePanel>

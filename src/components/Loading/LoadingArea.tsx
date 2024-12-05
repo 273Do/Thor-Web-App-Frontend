@@ -1,5 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
 
 const LoadingArea = () => {
   return (
@@ -9,22 +14,22 @@ const LoadingArea = () => {
           <CardTitle>フィードバック</CardTitle>
         </CardHeader>
         <div className="h-px w-full bg-border"></div>
-        <div className="flex h-80">
-          <div>
-            <div className="size-full w-[150px] p-6">
+        <ResizablePanelGroup direction="horizontal">
+          <ResizablePanel defaultSize={25}>
+            <div className="size-full w-[200px] p-6 pr-0">
               <Skeleton className="size-full rounded-xl" />
             </div>
-          </div>
-          <div className="h-full w-px bg-border"></div>
-          <div className="m-6 h-full w-3/4">
-            <Skeleton className="mb-3 h-10 rounded-xl" />
-            <Skeleton className="mt-3 h-56 rounded-xl" />
-          </div>
-        </div>
+          </ResizablePanel>
+          <ResizableHandle withHandle />
+          <ResizablePanel>
+            <div className="size-full p-6">
+              <Skeleton className="mb-3 h-10 rounded-xl" />
+              <Skeleton className="mt-3 h-56 rounded-xl" />
+            </div>
+          </ResizablePanel>
+        </ResizablePanelGroup>
         <div className="h-px w-full bg-border"></div>
-        <CardTitle className="p-6 pb-3 text-xl">
-          <Skeleton className="h-10 rounded-xl" />
-        </CardTitle>
+        <CardTitle className="p-6 pb-3 text-xl">睡眠時間チャート</CardTitle>
         <CardContent>
           <Skeleton className="h-80 w-full rounded-xl" />
         </CardContent>
