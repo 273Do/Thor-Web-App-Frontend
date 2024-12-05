@@ -7,12 +7,13 @@ import {
 import { useEffect, useState } from "react";
 import { processData } from "@/functions/data-format";
 import { Button } from "../ui/button";
-import Chart from "./Chart";
-import { EstimateData, ResultType } from "./types";
+import { FormattedType, ResultType } from "./types";
+import SleepTimeChart from "./SleepTimeChart";
 
-const Feedback = ({ estimate_data }: { estimate_data: EstimateData }) => {
-  const { feedback } = estimate_data;
-  const [data, setData] = useState<ResultType>({
+const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
+  const { feedback, result } = estimate_data;
+  console.log(estimate_data.result);
+  const [data, setData] = useState<FormattedType>({
     formattedData: [],
   });
   const [selectedTitle, setSelectedTitle] = useState<string>("");
@@ -20,13 +21,13 @@ const Feedback = ({ estimate_data }: { estimate_data: EstimateData }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await processData(feedback);
-      setData(result);
+      const format_result = await processData(feedback);
+      setData(format_result);
 
-      const firstTitle = result.formattedData[0].content[0].title;
+      const firstTitle = format_result.formattedData[0].content[0].title;
       setSelectedTitle(firstTitle);
 
-      console.log(result);
+      console.log(format_result);
     };
     fetchData();
   }, []);
@@ -91,11 +92,12 @@ const Feedback = ({ estimate_data }: { estimate_data: EstimateData }) => {
         </ResizablePanelGroup>
         <div className="h-px w-full bg-border"></div>
         <CardTitle className="p-6 pb-3 text-xl">
-          就寝・起床時刻チャート
+          {/* 就寝・起床時刻チャート */}
+          睡眠時間チャート
         </CardTitle>
         <CardContent>
           <div className="w-full">
-            <Chart />
+            <SleepTimeChart data={result} />
           </div>
         </CardContent>
       </Card>
