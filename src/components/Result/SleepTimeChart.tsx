@@ -3,7 +3,6 @@ import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
-  ChartTooltipContent,
 } from "@/components/ui/chart";
 
 import { EstimateDataType } from "./types";
@@ -46,10 +45,8 @@ export default function SleepTimeChart({ data }: { data: EstimateDataType }) {
           tickMargin={8}
           tickFormatter={(value: string) => value.slice(5, 10)}
         />
-        {/* <YAxis domain={[0, 24]} axisLine={false} tickLine={false} /> */}
         <ChartTooltip
           cursor={true}
-          // content={<ChartTooltipContent indicator={"dot"} />
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           content={({ payload }: { payload: any }) => {
             if (payload && payload.length) {

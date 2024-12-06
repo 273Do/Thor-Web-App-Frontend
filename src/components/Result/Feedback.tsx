@@ -9,7 +9,6 @@ import { processData } from "@/functions/data-format";
 import { Button } from "../ui/button";
 import { FormattedType, ResultType } from "./types";
 import SleepTimeChart from "./SleepTimeChart";
-import TestChart from "./TestChart";
 import SleepRangeChart from "./SleepRangeChart";
 import { ArrowRightLeft } from "lucide-react";
 
@@ -61,7 +60,7 @@ const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
         <div className="h-px w-full bg-border"></div>
         <ResizablePanelGroup direction="horizontal">
           <ResizablePanel defaultSize={25}>
-            <div className="m-6 ">
+            <div className="m-6">
               {/* sectionとtitleを抽出 */}
               {data.formattedData.map((item_s, i) => (
                 <div key={i}>

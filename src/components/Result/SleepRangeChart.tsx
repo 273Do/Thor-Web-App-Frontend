@@ -1,25 +1,9 @@
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  ReferenceLine,
-} from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import {
   ChartConfig,
   ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
   ChartTooltip,
-  ChartTooltipContent,
 } from "@/components/ui/chart";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { EstimateDataType } from "./types";
 import { convertToHours } from "@/functions/time-format";
 import { Card } from "../ui/card";
@@ -36,8 +20,8 @@ const chartConfig: ChartConfig = {
 const SleepRangeChart = ({ data }: { data: EstimateDataType }) => {
   const transformedData = data.map((item: EstimateDataType) => ({
     date: item.date,
-    就寝時刻: -convertToHours(item.bed_time),
-    起床時刻: -convertToHours(item.wake_time),
+    就寝時刻: (-convertToHours(item.bed_time)).toString(),
+    起床時刻: (-convertToHours(item.wake_time)).toString(),
     睡眠時間: convertToHours(item.sleep_time),
     bed_time: item.bed_time,
     wake_time: item.wake_time,
@@ -62,8 +46,6 @@ const SleepRangeChart = ({ data }: { data: EstimateDataType }) => {
           tickMargin={8}
           tickFormatter={(value: string) => value.slice(5, 10)}
         />
-        {/* <YAxis domain={[0, 24]} axisLine={false} tickLine={false} /> */}
-        {/* <ChartTooltip content={<ChartTooltipContent indicator={"dot"} />} /> */}
         <ChartTooltip
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           content={({ payload }: { payload: any }) => {
@@ -92,15 +74,7 @@ const SleepRangeChart = ({ data }: { data: EstimateDataType }) => {
           }}
           //   content={<ChartTooltipContent indicator={"dot"}  />}
         />
-        {/* <ChartLegend content={<ChartLegendContent />} /> */}
-        {/* <ReferenceLine y={0} stroke="#000" /> */}
-        <Bar
-          dataKey="就寝時刻"
-          //   fill={Theme === "dark" ? "#fff" : "#000"}
-          fill="#ffffff10"
-          radius={4}
-          stackId="stack"
-        />
+        <Bar dataKey="就寝時刻" fill="#ffffff10" radius={4} stackId="stack" />
         <Bar
           dataKey="起床時刻"
           fill="var(--primary-gr-r)"
