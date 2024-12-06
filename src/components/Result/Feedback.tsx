@@ -9,8 +9,9 @@ import { processData } from "@/functions/data-format";
 import { Button } from "../ui/button";
 import { FormattedType, ResultType } from "./types";
 import SleepTimeChart from "./SleepTimeChart";
-import SleepDurationChart from "./Testchart";
-import SleepPatternChart from "./Testchart";
+import TestChart from "./TestChart";
+import SleepRangeChart from "./SleepRangeChart";
+import { ArrowRightLeft } from "lucide-react";
 
 const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
   const { feedback, result } = estimate_data;
@@ -20,6 +21,7 @@ const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
   });
   const [selectedTitle, setSelectedTitle] = useState<string>("");
   const [content, setContent] = useState<string | null>(null);
+  const [isSleepChat, setIsSleepChat] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -92,13 +94,27 @@ const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
           </ResizablePanel>
         </ResizablePanelGroup>
         <div className="h-px w-full bg-border"></div>
-        <CardTitle className="p-6 pb-3 text-xl">
-          {/* 就寝・起床時刻チャート */}
-          睡眠時間チャート
+        <CardTitle className="flex items-center justify-between p-6 pb-3 text-xl">
+          <p>
+            {isSleepChat === true
+              ? "睡眠時間チャート"
+              : "就寝・起床時刻チャート"}
+          </p>
+          <Button
+            variant="ghost"
+            className="p-3"
+            onClick={() => setIsSleepChat((prev) => !prev)}
+          >
+            <ArrowRightLeft />
+          </Button>
         </CardTitle>
         <CardContent>
           <div className="w-full">
-            <SleepTimeChart data={result} />
+            {isSleepChat === true ? (
+              <SleepTimeChart data={result} />
+            ) : (
+              <SleepRangeChart data={result} />
+            )}
           </div>
         </CardContent>
       </Card>

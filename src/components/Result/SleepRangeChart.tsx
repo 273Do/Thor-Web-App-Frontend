@@ -1,27 +1,43 @@
-import { CartesianGrid, XAxis, Line, LineChart } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  ReferenceLine,
+} from "recharts";
 import {
   ChartConfig,
   ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { EstimateDataType } from "./types";
 import { convertToHours } from "@/functions/time-format";
 import { Card } from "../ui/card";
 
 const chartConfig: ChartConfig = {
-  睡眠時間: {
-    label: "睡眠時間(h)　",
+  就寝時刻: {
+    label: "就寝時刻(h)　",
+  },
+  起床時刻: {
+    label: "起床時刻(h)　",
   },
 };
 
-export default function SleepTimeChart({ data }: { data: EstimateDataType }) {
-  // 元のオブジェクトをdateと睡眠時間をkeyにもつオブジェクトに変換
+const SleepRangeChart = ({ data }: { data: EstimateDataType }) => {
   const transformedData = data.map((item: EstimateDataType) => ({
     date: item.date,
-    就寝時刻: convertToHours(item.bed_time),
-    起床時刻: convertToHours(item.wake_time),
+    就寝時刻: -convertToHours(item.bed_time),
+    起床時刻: -convertToHours(item.wake_time),
     睡眠時間: convertToHours(item.sleep_time),
     bed_time: item.bed_time,
     wake_time: item.wake_time,
@@ -30,7 +46,7 @@ export default function SleepTimeChart({ data }: { data: EstimateDataType }) {
 
   return (
     <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
-      <LineChart
+      <BarChart
         accessibilityLayer
         data={transformedData}
         margin={{
@@ -47,9 +63,8 @@ export default function SleepTimeChart({ data }: { data: EstimateDataType }) {
           tickFormatter={(value: string) => value.slice(5, 10)}
         />
         {/* <YAxis domain={[0, 24]} axisLine={false} tickLine={false} /> */}
+        {/* <ChartTooltip content={<ChartTooltipContent indicator={"dot"} />} /> */}
         <ChartTooltip
-          cursor={true}
-          // content={<ChartTooltipContent indicator={"dot"} />
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           content={({ payload }: { payload: any }) => {
             if (payload && payload.length) {
@@ -58,11 +73,15 @@ export default function SleepTimeChart({ data }: { data: EstimateDataType }) {
                 <Card className="p-2 shadow-2xl">
                   <p className="mb-1">{item.date}</p>
                   <div className="flex items-center">
-                    <div className="h-3 w-1 rounded-[2px] bg-[#f4a283]"></div>
+                    <div className=" h-8 w-1 rounded-[2px] bg-[#cd7290]"></div>
                     <div className="ml-2">
                       <div className="flex gap-3">
-                        <p className="text-muted-foreground">睡眠時間</p>
-                        <p className="font-mono">{item.sleep_time}</p>
+                        <p className="text-muted-foreground">就寝時刻</p>
+                        <p className="font-mono">{item.bed_time}</p>
+                      </div>
+                      <div className="flex gap-3">
+                        <p className="text-muted-foreground">起床時刻</p>
+                        <p className="font-mono">{item.wake_time}</p>
                       </div>
                     </div>
                   </div>
@@ -71,15 +90,26 @@ export default function SleepTimeChart({ data }: { data: EstimateDataType }) {
             }
             return null;
           }}
+          //   content={<ChartTooltipContent indicator={"dot"}  />}
         />
-        <Line
-          dataKey="睡眠時間"
-          type="monotone"
-          stroke="var(--primary-gr-l)"
-          strokeWidth={2}
-          dot={false}
+        {/* <ChartLegend content={<ChartLegendContent />} /> */}
+        {/* <ReferenceLine y={0} stroke="#000" /> */}
+        <Bar
+          dataKey="就寝時刻"
+          //   fill={Theme === "dark" ? "#fff" : "#000"}
+          fill="#ffffff10"
+          radius={4}
+          stackId="stack"
         />
-      </LineChart>
+        <Bar
+          dataKey="起床時刻"
+          fill="var(--primary-gr-r)"
+          radius={4}
+          stackId="stack"
+        />
+      </BarChart>
     </ChartContainer>
   );
-}
+};
+
+export default SleepRangeChart;

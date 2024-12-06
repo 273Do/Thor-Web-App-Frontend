@@ -6,7 +6,12 @@ type FormattedType = {
 
 type EstimateDataType = {
   map(
-    arg0: (item: EstimateDataType) => { date: string; 睡眠時間: string }
+    arg0: (item: EstimateDataType) => {
+      date: string;
+      就寝時刻: string;
+      起床時刻: string;
+      睡眠時間: string;
+    }
   ): unknown;
   date: string;
   bed_time: string;

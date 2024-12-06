@@ -5,6 +5,8 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
+import { Button } from "../ui/button";
+import { ArrowRightLeft } from "lucide-react";
 
 const LoadingArea = () => {
   return (
@@ -29,7 +31,12 @@ const LoadingArea = () => {
           </ResizablePanel>
         </ResizablePanelGroup>
         <div className="h-px w-full bg-border"></div>
-        <CardTitle className="p-6 pb-3 text-xl">睡眠時間チャート</CardTitle>
+        <CardTitle className="flex items-center justify-between p-6 pb-3 text-xl">
+          <p>就寝・起床時刻チャート</p>
+          <Button variant="ghost" className="p-3">
+            <ArrowRightLeft />
+          </Button>
+        </CardTitle>
         <CardContent>
           <Skeleton className="h-80 w-full rounded-xl" />
         </CardContent>
