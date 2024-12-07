@@ -16,14 +16,16 @@ import { createChartData } from "@/functions/time-format";
 const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
   const { feedback, result } = estimate_data;
   const { sleepRangeData, sleepTimeData } = createChartData(result);
-  console.log(result);
+
   const [data, setData] = useState<FormattedType>({
     formattedData: [],
   });
   const [selectedTitle, setSelectedTitle] = useState<string>("");
   const [content, setContent] = useState<string | null>(null);
-  const [isSleepChat, setIsSleepChat] = useState<boolean>(false);
 
+  const [isSleepRangeChart, setIsSleepRangeChart] = useState<boolean>(false);
+
+  // 初回表示のみ
   useEffect(() => {
     const fetchData = async () => {
       const format_result = await processData(feedback);
@@ -97,24 +99,24 @@ const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
         <div className="h-px w-full bg-border"></div>
         <CardTitle className="flex items-center justify-between p-6 pb-3 text-xl">
           <p>
-            {isSleepChat === true
-              ? "睡眠時間チャート"
-              : "就寝・起床時刻チャート"}
+            {isSleepRangeChart === true
+              ? "就寝・起床時刻チャート"
+              : "睡眠時間チャート"}
           </p>
           <Button
             variant="ghost"
             className="p-3"
-            onClick={() => setIsSleepChat((prev) => !prev)}
+            onClick={() => setIsSleepRangeChart((prev) => !prev)}
           >
             <ArrowRightLeft />
           </Button>
         </CardTitle>
         <CardContent>
           <div className="w-full">
-            {isSleepChat === true ? (
-              <SleepTimeChart data={sleepTimeData} />
-            ) : (
+            {isSleepRangeChart === true ? (
               <SleepRangeChart data={sleepRangeData} />
+            ) : (
+              <SleepTimeChart data={sleepTimeData} />
             )}
           </div>
         </CardContent>
