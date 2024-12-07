@@ -8,6 +8,7 @@ import {
 import { EstimateDataType } from "./types";
 import { convertToHours } from "@/functions/time-format";
 import { Card } from "../ui/card";
+import { Footprints, Sunrise } from "lucide-react";
 
 const chartConfig: ChartConfig = {
   睡眠時間: {
@@ -25,6 +26,8 @@ export default function SleepTimeChart({ data }: { data: EstimateDataType }) {
     bed_time: item.bed_time,
     wake_time: item.wake_time,
     sleep_time: item.sleep_time,
+    staying_up_late: item.staying_up_late,
+    data_count: item.data_count,
   }));
 
   return (
@@ -53,7 +56,17 @@ export default function SleepTimeChart({ data }: { data: EstimateDataType }) {
               const item = payload[0].payload;
               return (
                 <Card className="p-2 shadow-2xl">
-                  <p className="mb-1">{item.date}</p>
+                  <div className="mb-1 flex items-center justify-between">
+                    <p>{item.date}</p>
+                    <div className="mb-1 flex gap-1">
+                      {item.staying_up_late && (
+                        <Sunrise className="text-[#cd7290]" size={15} />
+                      )}
+                      {item.data_count < 7 && (
+                        <Footprints className="text-[#cd7290]" size={15} />
+                      )}
+                    </div>
+                  </div>
                   <div className="flex items-center">
                     <div className="h-3 w-1 rounded-[2px] bg-[#f4a283]"></div>
                     <div className="ml-2">
