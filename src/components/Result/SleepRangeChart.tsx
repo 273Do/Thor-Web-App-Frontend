@@ -58,13 +58,12 @@ const SleepRangeChart = ({ data }: { data: EstimateDataType }) => {
                 <Card className="p-2 shadow-2xl">
                   <div className="mb-1 flex items-center justify-between">
                     <p>{item.date}</p>
-                    <div className="mb-1 flex  gap-1">
+                    <div className="flex  gap-1">
                       {item.staying_up_late && (
-                        <Sunrise className="text-[#f4a283]" size={15} />
+                        <Sunrise className="text-[#f4a283]" size={13} />
                       )}
-                      {item.data_count < 7 && (
-                        <Footprints className="text-[#f4a283]" size={15} />
-                      )}
+                      <Footprints className="text-[#f4a283]" size={13} />
+                      <p className="font-mono">{item.data_count}</p>
                     </div>
                   </div>
                   <div className="flex items-center">
