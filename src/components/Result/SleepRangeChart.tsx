@@ -4,8 +4,7 @@ import {
   ChartContainer,
   ChartTooltip,
 } from "@/components/ui/chart";
-import { EstimateDataType } from "./types";
-import { convertToHours } from "@/functions/time-format";
+import { SleepRangeDataType } from "./types";
 import { Card } from "../ui/card";
 import { Footprints, Sunrise } from "lucide-react";
 
@@ -18,24 +17,12 @@ const chartConfig: ChartConfig = {
   },
 };
 
-const SleepRangeChart = ({ data }: { data: EstimateDataType }) => {
-  const transformedData = data.map((item: EstimateDataType) => ({
-    date: item.date,
-    就寝時刻: (-convertToHours(item.bed_time)).toString(),
-    起床時刻: (-convertToHours(item.wake_time)).toString(),
-    睡眠時間: convertToHours(item.sleep_time),
-    bed_time: item.bed_time,
-    wake_time: item.wake_time,
-    sleep_time: item.sleep_time,
-    staying_up_late: item.staying_up_late,
-    data_count: item.data_count,
-  }));
-
+const SleepRangeChart = ({ data }: { data: SleepRangeDataType }) => {
   return (
     <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
       <BarChart
         accessibilityLayer
-        data={transformedData}
+        data={data}
         margin={{
           left: 12,
           right: 12,
@@ -58,7 +45,7 @@ const SleepRangeChart = ({ data }: { data: EstimateDataType }) => {
                 <Card className="p-2 shadow-2xl">
                   <div className="mb-1 flex items-center justify-between">
                     <p>{item.date}</p>
-                    <div className="flex  gap-1">
+                    <div className="flex gap-1">
                       {item.staying_up_late && (
                         <Sunrise className="text-[#f4a283]" size={13} />
                       )}

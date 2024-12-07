@@ -11,9 +11,11 @@ import { FormattedType, ResultType } from "./types";
 import SleepTimeChart from "./SleepTimeChart";
 import SleepRangeChart from "./SleepRangeChart";
 import { ArrowRightLeft } from "lucide-react";
+import { createChartData } from "@/functions/time-format";
 
 const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
   const { feedback, result } = estimate_data;
+  const { sleepRangeData, sleepTimeData } = createChartData(result);
   console.log(result);
   const [data, setData] = useState<FormattedType>({
     formattedData: [],
@@ -30,7 +32,7 @@ const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
       const firstTitle = format_result.formattedData[0].content[0].title;
       setSelectedTitle(firstTitle);
 
-      console.log(format_result);
+      // console.log(format_result);
     };
     fetchData();
   }, []);
@@ -110,9 +112,9 @@ const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
         <CardContent>
           <div className="w-full">
             {isSleepChat === true ? (
-              <SleepTimeChart data={result} />
+              <SleepTimeChart data={sleepTimeData} />
             ) : (
-              <SleepRangeChart data={result} />
+              <SleepRangeChart data={sleepRangeData} />
             )}
           </div>
         </CardContent>

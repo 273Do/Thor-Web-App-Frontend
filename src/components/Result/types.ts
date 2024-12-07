@@ -4,21 +4,28 @@ type FormattedType = {
   formattedData: Section[];
 };
 
-type EstimateDataType = {
-  map(
-    arg0: (item: EstimateDataType) => {
-      date: string;
-      就寝時刻: string;
-      起床時刻: string;
-      睡眠時間: string;
-    }
-  ): unknown;
+type CommonSleepDataType = {
   date: string;
+  staying_up_late: boolean;
+  data_count: number;
+};
+
+type EstimateDataType = CommonSleepDataType & {
   bed_time: string;
   wake_time: string;
   sleep_time: string;
-  staying_up_late: boolean;
-  data_count: number;
+};
+
+type SleepRangeDataType = CommonSleepDataType & {
+  bed_time: string;
+  wake_time: string;
+  就寝時刻: string;
+  起床時刻: string;
+};
+
+type SleepTimeDataType = CommonSleepDataType & {
+  sleep_time: string;
+  睡眠時間: string;
 };
 
 type ResultType = {
@@ -26,4 +33,10 @@ type ResultType = {
   result: EstimateDataType;
 };
 
-export type { ResultType, EstimateDataType, FormattedType };
+export type {
+  ResultType,
+  EstimateDataType,
+  SleepTimeDataType,
+  SleepRangeDataType,
+  FormattedType,
+};
