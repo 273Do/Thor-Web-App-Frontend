@@ -42,8 +42,6 @@ const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
       // 初期表示のタイトルを設定
       const firstTitle = format_result.formattedData[0].content[0].title;
       setSelectedTitle(firstTitle);
-
-      // console.log(format_result);
     };
     fetchData();
   }, []);

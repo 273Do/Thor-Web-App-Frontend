@@ -20,7 +20,7 @@ const useContent = (data: FormattedType) => {
 
     const result = findContentByTitle(selectedTitle);
     setContent(result);
-  }, [selectedTitle, data.formattedData]);
+  }, [selectedTitle, data]);
 
   return { selectedTitle, setSelectedTitle, content };
 };
