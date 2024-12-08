@@ -1,7 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 
 const ResultTitle = () => {
+  // 現在のページをリフレッシュ
+
+  // const navigate = useNavigate();
+  const handleRefresh = () => {
+    // navigate(0);
+    window.location.reload(); // 履歴を残さないためリロード
+  };
+
   return (
     <div className="my-8 flex flex-col items-center text-muted-foreground">
       <p>歩数データから睡眠推定を行いました。</p>
@@ -12,7 +20,7 @@ const ResultTitle = () => {
             終了する
           </Button>
         </Link>
-        <Button>もう一度</Button>
+        <Button onClick={handleRefresh}>もう一度</Button>
       </div>
     </div>
   );
