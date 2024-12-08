@@ -54,7 +54,7 @@ async function processData(data: string) {
       }
     }
   });
-
+  // console.log(formattedData);
   return {
     formattedData,
   };

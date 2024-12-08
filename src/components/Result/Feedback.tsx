@@ -12,25 +12,34 @@ import SleepTimeChart from "./SleepTimeChart";
 import SleepRangeChart from "./SleepRangeChart";
 import { ArrowRightLeft } from "lucide-react";
 import { createChartData } from "@/functions/time-format";
+import { useContent } from "@/hooks/use-content";
 
 const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
+  // 各データを取得
   const { feedback, result } = estimate_data;
+
+  // チャート用のデータを作成
   const { sleepRangeData, sleepTimeData } = createChartData(result);
 
+  // フィードバックのデータを格納
   const [data, setData] = useState<FormattedType>({
     formattedData: [],
   });
-  const [selectedTitle, setSelectedTitle] = useState<string>("");
-  const [content, setContent] = useState<string | null>(null);
 
+  // 指定タイトルを入力するとコンテンツを返すカスタムフック
+  const { selectedTitle, setSelectedTitle, content } = useContent(data);
+
+  // 就寝・起床時刻チャート表示フラグ
   const [isSleepRangeChart, setIsSleepRangeChart] = useState<boolean>(false);
 
-  // 初回表示のみ
+  // 整形とデータのセットは初回表示のみ
   useEffect(() => {
     const fetchData = async () => {
+      // フィードバックデータを整形
       const format_result = await processData(feedback);
       setData(format_result);
 
+      // 初期表示のタイトルを設定
       const firstTitle = format_result.formattedData[0].content[0].title;
       setSelectedTitle(firstTitle);
 
@@ -38,22 +47,6 @@ const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
     };
     fetchData();
   }, []);
-
-  // 指定タイトルのコンテンツを検索
-  useEffect(() => {
-    const findContentByTitle = (title: string): string | null => {
-      for (const section of data.formattedData) {
-        const found = section.content.find((item) => item.title === title);
-        if (found) {
-          return found.content; // コンテンツを返す
-        }
-      }
-      return null; // 該当なし
-    };
-
-    const result = findContentByTitle(selectedTitle);
-    setContent(result);
-  }, [selectedTitle, data]);
 
   return (
     <>

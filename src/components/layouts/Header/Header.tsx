@@ -19,9 +19,15 @@ const Header = () => {
               </Button>
             </li>
             <li>
-              <Button variant="ghost" className="p-3">
-                <SiGithub />
-              </Button>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/273Do/Thor-Web-App-Backend"
+              >
+                <Button variant="ghost" className="p-3">
+                  <SiGithub />
+                </Button>
+              </a>
             </li>
           </ul>
         </div>
