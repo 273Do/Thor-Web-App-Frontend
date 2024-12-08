@@ -28,6 +28,7 @@ import {
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { formSchema } from "./types";
 
 // answer_bedの項目を定義
 const answer_bed = [
@@ -40,23 +41,6 @@ const answer_bed = [
 
 // answer_wakeの項目を定義
 const answer_wake = ["よく持ち歩く", "持ち歩く", "あまり持ち歩かない"];
-
-// フォームのスキーマを定義
-const formSchema = z.object({
-  answer_bed: z.string({ required_error: "必須項目です。" }),
-  answer_wake: z.string({ required_error: "必須項目です。" }),
-  answer_habit: z.string({ required_error: "必須項目です。" }),
-  zip_file: z
-    .instanceof(File)
-    .refine(
-      (file) =>
-        file.type === "application/zip" ||
-        file.type === "application/x-zip-compressed",
-      {
-        message: "アップロードされたファイルはZIP形式である必要があります。",
-      }
-    ),
-});
 
 const AnalysisForm = () => {
   // フォームのバリデーションを設定
@@ -205,7 +189,7 @@ const AnalysisForm = () => {
               />
               <Button
                 type="submit"
-                className="w-full bg-primary-gradient transition-all duration-100 hover:opacity-80"
+                className="w-full bg-primary-gradient text-white transition-all duration-100 hover:opacity-80"
               >
                 推定を行う
               </Button>
