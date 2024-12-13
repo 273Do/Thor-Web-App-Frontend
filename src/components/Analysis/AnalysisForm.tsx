@@ -32,16 +32,16 @@ import { AnalysisFormProps, formSchema } from "./types";
 
 const AnalysisForm = ({
   onSubmit,
-  answer_bed,
-  answer_wake,
+  bed_answer,
+  wake_answer,
 }: AnalysisFormProps) => {
   // フォームのバリデーションを設定
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     // defaultValues: {
-    //   answer_bed: 0,
-    //   answer_wake: 0,
-    //   answer_habit: 0,
+    //   bed_answer: 0,
+    //   wake_answer: 0,
+    //   habit_answer: 0,
     // },
   });
 
@@ -77,7 +77,7 @@ const AnalysisForm = ({
               />
               <FormField
                 control={form.control}
-                name="answer_bed"
+                name="bed_answer"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>質問1</FormLabel>
@@ -95,7 +95,7 @@ const AnalysisForm = ({
                           <SelectLabel>
                             就寝何時間前にスマートフォンの充電を始めますか？
                           </SelectLabel>
-                          {answer_bed.map((item, index) => (
+                          {bed_answer.map((item, index) => (
                             <SelectItem key={index} value={item}>
                               {item}
                             </SelectItem>
@@ -112,7 +112,7 @@ const AnalysisForm = ({
               />
               <FormField
                 control={form.control}
-                name="answer_wake"
+                name="wake_answer"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>質問2</FormLabel>
@@ -130,7 +130,7 @@ const AnalysisForm = ({
                           <SelectLabel>
                             家の中でスマートフォンを持ち歩きますか？
                           </SelectLabel>
-                          {answer_wake.map((item, index) => (
+                          {wake_answer.map((item, index) => (
                             <SelectItem key={index} value={item}>
                               {item}
                             </SelectItem>
@@ -147,7 +147,7 @@ const AnalysisForm = ({
               />
               <FormField
                 control={form.control}
-                name="answer_habit"
+                name="habit_answer"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>質問3</FormLabel>

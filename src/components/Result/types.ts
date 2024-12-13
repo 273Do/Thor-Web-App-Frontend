@@ -34,9 +34,9 @@ type ResultType = {
 };
 
 type FormDataType = {
-  answer_bed: number;
-  answer_wake: number;
-  answer_habit: number;
+  bed_answer: number;
+  wake_answer: number;
+  habit_answer: number;
   zip_file: File;
 };
 

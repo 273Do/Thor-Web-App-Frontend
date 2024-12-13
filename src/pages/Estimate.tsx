@@ -7,8 +7,8 @@ import * as Layout from "@/components/layouts/index";
 import { Suspense, useState } from "react";
 import { z } from "zod";
 
-// answer_bedの項目を定義
-const answer_bed = [
+// bed_answerの項目を定義
+const bed_answer = [
   "就寝直前",
   "15分前程度",
   "30分前程度",
@@ -16,8 +16,8 @@ const answer_bed = [
   "充電しない",
 ];
 
-// answer_wakeの項目を定義
-const answer_wake = ["よく持ち歩く", "持ち歩く", "あまり持ち歩かない"];
+// wake_answerの項目を定義
+const wake_answer = ["よく持ち歩く", "持ち歩く", "あまり持ち歩かない"];
 
 const Estimate = () => {
   const [show, setShow] = useState(false);
@@ -25,17 +25,17 @@ const Estimate = () => {
 
   // フォームの値を取得
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    const bed_id: number = answer_bed.indexOf(values.answer_bed);
-    const wake_id: number = answer_wake.indexOf(values.answer_wake);
+    const bed_id: number = bed_answer.indexOf(values.bed_answer);
+    const wake_id: number = wake_answer.indexOf(values.wake_answer);
     let is_staying_up_late;
-    if (values.answer_habit > "03:00" && values.answer_habit < "20:45") {
+    if (values.habit_answer > "03:00" && values.habit_answer < "20:45") {
       is_staying_up_late = 1;
     } else is_staying_up_late = 0;
 
     setFormData({
-      answer_bed: bed_id,
-      answer_wake: wake_id,
-      answer_habit: is_staying_up_late,
+      bed_answer: bed_id,
+      wake_answer: wake_id,
+      habit_answer: is_staying_up_late,
       zip_file: values.zip_file,
     });
   };
@@ -56,8 +56,8 @@ const Estimate = () => {
           <button onClick={() => setShow(true)}>show</button>
           <Analysis.Form
             onSubmit={onSubmit}
-            answer_bed={answer_bed}
-            answer_wake={answer_wake}
+            bed_answer={bed_answer}
+            wake_answer={wake_answer}
           />
         </Layout.Content>
       </>

@@ -1,26 +1,27 @@
 import { FormDataType } from "@/components/Result/types";
-import { get_presigned_url } from "./get_presigned";
-import { upload_zip } from "./upload_zip";
+import { getPresignedUrl } from "./get_presigned";
+import { uploadZip } from "./upload_zip";
+import { analysisRequest } from "./analysis_request";
 
-export const analysisRequest = async (props: FormDataType) => {
-  const { answer_bed, answer_wake, answer_habit, zip_file } = props;
-  console.log(answer_bed, answer_wake, answer_habit, zip_file);
+export const postAnalysisProcess = async (props: FormDataType) => {
+  const { zip_file } = props;
 
   try {
     // 署名付きURLを取得
-    const { PUT_URL, UUID } = await get_presigned_url(zip_file.name);
+    const { PUT_URL, UUID } = await getPresignedUrl(zip_file.name);
 
     // S3へファイルをアップロード
-    const response = await upload_zip(zip_file, PUT_URL);
+    const response = await uploadZip(zip_file, PUT_URL);
     // アップローが失敗した場合のエラー処理
     if (response.status !== 200) {
       alert(`推定に失敗しました。\n status: ${response.status}`);
       window.location.reload();
     }
 
-    // 解析処理を要求
-
     console.log(`success!`);
+
+    // 解析処理を要求
+    const { result } = await analysisRequest(UUID, props);
   } catch (error) {
     // エラー処理
     alert(`推定に失敗しました。\n ${error}`);

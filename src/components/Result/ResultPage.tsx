@@ -2,7 +2,7 @@ import * as Layout from "@/components/layouts/index";
 import ResultTitle from "./ResultTitle";
 import Feedback from "./Feedback";
 import { fetchPosts } from "@/functions/demo-request";
-import { analysisRequest } from "@/functions/analysis/main";
+import { postAnalysisProcess } from "@/functions/analysis/main";
 import { FormDataType } from "./types";
 import { Button } from "../ui/button";
 
@@ -12,7 +12,7 @@ import { Button } from "../ui/button";
 const ResultPage = ({ form_data }: { form_data: FormDataType | null }) => {
   // const estimate_data = fetchPosts()();
   if (form_data) {
-    analysisRequest(form_data);
+    postAnalysisProcess(form_data);
 
     return (
       <>
