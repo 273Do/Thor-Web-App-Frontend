@@ -28,13 +28,7 @@ import {
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { formSchema } from "./types";
-
-type AnalysisFormProps = {
-  onSubmit: (values: z.infer<typeof formSchema>) => void;
-  answer_bed: string[];
-  answer_wake: string[];
-};
+import { AnalysisFormProps, formSchema } from "./types";
 
 const AnalysisForm = ({
   onSubmit,

@@ -2,6 +2,7 @@ import * as Analysis from "@/components/Analysis/index";
 import { formSchema } from "@/components/Analysis/types";
 import LoadingPage from "@/components/Loading/LoadingPage";
 import ResultPage from "@/components/Result/ResultPage";
+import { FormDataType } from "@/components/Result/types";
 import * as Layout from "@/components/layouts/index";
 import { Suspense, useState } from "react";
 import { z } from "zod";
@@ -20,6 +21,7 @@ const answer_wake = ["よく持ち歩く", "持ち歩く", "あまり持ち歩�
 
 const Estimate = () => {
   const [show, setShow] = useState(false);
+  const [formData, setFormData] = useState<FormDataType | null>(null);
 
   // フォームの値を取得
   const onSubmit = (values: z.infer<typeof formSchema>) => {
@@ -30,14 +32,18 @@ const Estimate = () => {
       is_staying_up_late = 1;
     } else is_staying_up_late = 0;
 
-    console.log(bed_id, wake_id, is_staying_up_late);
-    console.log(values.zip_file.name);
+    setFormData({
+      answer_bed: bed_id,
+      answer_wake: wake_id,
+      answer_habit: is_staying_up_late,
+      zip_file: values.zip_file,
+    });
   };
 
-  if (show) {
+  if (show || formData) {
     return (
       <Suspense fallback={<LoadingPage />}>
-        <ResultPage />
+        <ResultPage form_data={formData} />
       </Suspense>
     );
   } else

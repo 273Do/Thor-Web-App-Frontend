@@ -33,10 +33,18 @@ type ResultType = {
   result: EstimateDataType;
 };
 
+type FormDataType = {
+  answer_bed: number;
+  answer_wake: number;
+  answer_habit: number;
+  zip_file: File;
+};
+
 export type {
   ResultType,
   EstimateDataType,
   SleepTimeDataType,
   SleepRangeDataType,
   FormattedType,
+  FormDataType,
 };

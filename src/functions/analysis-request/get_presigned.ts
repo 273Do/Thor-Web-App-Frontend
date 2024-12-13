@@ -3,7 +3,6 @@ const GET_PRESIGNED_URL: string = import.meta.env.VITE_GET_PRESIGNED_URL;
 
 // S3にアップロードするための署名付きURLを取得するための関数
 export async function get_presigned_url(file_name: string) {
-  //   try {
   const request = await fetch(`${GET_PRESIGNED_URL}/get_presigned_url`, {
     method: "POST",
     headers: {

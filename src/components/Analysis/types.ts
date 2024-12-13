@@ -17,4 +17,11 @@ const formSchema = z.object({
     ),
 });
 
-export { formSchema };
+// フォームのpropsの型を定義
+type AnalysisFormProps = {
+  onSubmit: (values: z.infer<typeof formSchema>) => void;
+  answer_bed: string[];
+  answer_wake: string[];
+};
+
+export { formSchema, type AnalysisFormProps };
