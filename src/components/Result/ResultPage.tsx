@@ -1,8 +1,8 @@
 import * as Layout from "@/components/layouts/index";
 import ResultTitle from "./ResultTitle";
 import Feedback from "./Feedback";
-import { fetchPosts } from "@/functions/analysis-request";
-import { analysisRequest } from "@/functions/analysis-request/main";
+import { fetchPosts } from "@/functions/demo-request";
+import { analysisRequest } from "@/functions/analysis/main";
 import { FormDataType } from "./types";
 import { Button } from "../ui/button";
 
