@@ -30,19 +30,17 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchema } from "./types";
 
-// answer_bedの項目を定義
-const answer_bed = [
-  "就寝直前",
-  "15分前程度",
-  "30分前程度",
-  "1時間前程度",
-  "充電しない",
-];
+type AnalysisFormProps = {
+  onSubmit: (values: z.infer<typeof formSchema>) => void;
+  answer_bed: string[];
+  answer_wake: string[];
+};
 
-// answer_wakeの項目を定義
-const answer_wake = ["よく持ち歩く", "持ち歩く", "あまり持ち歩かない"];
-
-const AnalysisForm = () => {
+const AnalysisForm = ({
+  onSubmit,
+  answer_bed,
+  answer_wake,
+}: AnalysisFormProps) => {
   // フォームのバリデーションを設定
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -52,20 +50,6 @@ const AnalysisForm = () => {
     //   answer_habit: 0,
     // },
   });
-
-  // フォームの送信処理
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    // 回答を番号に置換
-    const bed_id: number = answer_bed.indexOf(values.answer_bed);
-    const wake_id: number = answer_wake.indexOf(values.answer_wake);
-    let is_staying_up_late;
-    if (values.answer_habit > "03:00" && values.answer_habit < "20:45") {
-      is_staying_up_late = 1;
-    } else is_staying_up_late = 0;
-    console.log(bed_id, wake_id, is_staying_up_late);
-    console.log(values.zip_file.name);
-  };
 
   return (
     <>
