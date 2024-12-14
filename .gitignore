@@ -25,4 +25,4 @@ dist-ssr
 
 .env
 
-/test_data
+public/demo.json

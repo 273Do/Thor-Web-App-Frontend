@@ -28,10 +28,8 @@ export const postAnalysisProcess = (props: FormDataType) => {
       status = "success"; // 成功時
       result = response as ResultType; // 結果を保存
     } catch (err) {
-      console.error(err);
       alert(`推定に失敗しました。\n ${err}`);
       window.location.reload();
-      // throw error;
       status = "error"; // エラー時
       error = err as Error;
     }
@@ -39,7 +37,6 @@ export const postAnalysisProcess = (props: FormDataType) => {
 
   // データを取得しPromiseをキャッシュ
   const resultPromise = loadData();
-  console.log("resultPromise", resultPromise);
 
   // サスペンド用のラッパーを返す
   return {

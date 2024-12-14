@@ -3,11 +3,8 @@ import ResultTitle from "./ResultTitle";
 import Feedback from "./Feedback";
 import { ResultType } from "./types";
 
-// const ResultPage = ({ resource }: { resource: { read(): ResultType } }) => {
 const ResultPage = ({ resource }: { resource: ResultType }) => {
-  // const estimate_data = fetchPosts()();
   const estimate_data: ResultType = resource.read();
-  // console.log("ResultPage読み込み");
   console.log(estimate_data);
 
   return (
