@@ -29,8 +29,9 @@ type SleepTimeDataType = CommonSleepDataType & {
 };
 
 type ResultType = {
+  read(): ResultType;
   feedback: string;
-  result: EstimateDataType;
+  result: EstimateDataType[];
 };
 
 type FormDataType = {
