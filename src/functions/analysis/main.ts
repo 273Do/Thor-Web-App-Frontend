@@ -10,7 +10,7 @@ export const postAnalysisProcess = (props: FormDataType) => {
 
   const loadData = async () => {
     const { zip_file } = props;
-    const UUID: string = "aaa";
+    // const UUID: string = "aaa";
 
     try {
       // 署名付きURLを取得

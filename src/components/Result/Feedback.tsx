@@ -16,10 +16,10 @@ import { useContent } from "@/hooks/use-content";
 
 const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
   // 各データを取得
-  const { feedback, result } = estimate_data;
+  const { feedback, results } = estimate_data;
 
   // チャート用のデータを作成
-  const { sleepRangeData, sleepTimeData } = createChartData(result);
+  const { sleepRangeData, sleepTimeData } = createChartData(results);
 
   // フィードバックのデータを格納
   const [data, setData] = useState<FormattedType>({

@@ -5,7 +5,6 @@ import { ResultType } from "./types";
 
 const ResultPage = ({ resource }: { resource: ResultType }) => {
   const estimate_data: ResultType = resource.read();
-  console.log(estimate_data);
 
   return (
     <>
