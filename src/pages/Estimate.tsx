@@ -21,7 +21,6 @@ const bed_answer = [
 const wake_answer = ["よく持ち歩く", "持ち歩く", "あまり持ち歩かない"];
 
 const Estimate = () => {
-  const [show, setShow] = useState(false);
   const [resource, setResource] = useState<ResultType | null>(null);
 
   // フォームの値を取得
@@ -55,7 +54,6 @@ const Estimate = () => {
           <Analysis.Title />
         </Layout.Title>
         <Layout.Content>
-          <button onClick={() => setShow(true)}>show</button>
           <Analysis.Form
             onSubmit={onSubmit}
             bed_answer={bed_answer}
