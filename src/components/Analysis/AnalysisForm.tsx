@@ -28,44 +28,22 @@ import {
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { formSchema } from "./types";
+import { AnalysisFormProps, formSchema } from "./types";
 
-// answer_bedの項目を定義
-const answer_bed = [
-  "就寝直前",
-  "15分前程度",
-  "30分前程度",
-  "1時間前程度",
-  "充電しない",
-];
-
-// answer_wakeの項目を定義
-const answer_wake = ["よく持ち歩く", "持ち歩く", "あまり持ち歩かない"];
-
-const AnalysisForm = () => {
+const AnalysisForm = ({
+  onSubmit,
+  bed_answer,
+  wake_answer,
+}: AnalysisFormProps) => {
   // フォームのバリデーションを設定
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     // defaultValues: {
-    //   answer_bed: 0,
-    //   answer_wake: 0,
-    //   answer_habit: 0,
+    //   bed_answer: 0,
+    //   wake_answer: 0,
+    //   habit_answer: 0,
     // },
   });
-
-  // フォームの送信処理
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    // 回答を番号に置換
-    const bed_id: number = answer_bed.indexOf(values.answer_bed);
-    const wake_id: number = answer_wake.indexOf(values.answer_wake);
-    let is_staying_up_late;
-    if (values.answer_habit > "03:00" && values.answer_habit < "20:45") {
-      is_staying_up_late = 1;
-    } else is_staying_up_late = 0;
-    console.log(bed_id, wake_id, is_staying_up_late);
-    console.log(values.zip_file.name);
-  };
 
   return (
     <>
@@ -99,7 +77,7 @@ const AnalysisForm = () => {
               />
               <FormField
                 control={form.control}
-                name="answer_bed"
+                name="bed_answer"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>質問1</FormLabel>
@@ -117,7 +95,7 @@ const AnalysisForm = () => {
                           <SelectLabel>
                             就寝何時間前にスマートフォンの充電を始めますか？
                           </SelectLabel>
-                          {answer_bed.map((item, index) => (
+                          {bed_answer.map((item, index) => (
                             <SelectItem key={index} value={item}>
                               {item}
                             </SelectItem>
@@ -134,7 +112,7 @@ const AnalysisForm = () => {
               />
               <FormField
                 control={form.control}
-                name="answer_wake"
+                name="wake_answer"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>質問2</FormLabel>
@@ -152,7 +130,7 @@ const AnalysisForm = () => {
                           <SelectLabel>
                             家の中でスマートフォンを持ち歩きますか？
                           </SelectLabel>
-                          {answer_wake.map((item, index) => (
+                          {wake_answer.map((item, index) => (
                             <SelectItem key={index} value={item}>
                               {item}
                             </SelectItem>
@@ -169,7 +147,7 @@ const AnalysisForm = () => {
               />
               <FormField
                 control={form.control}
-                name="answer_habit"
+                name="habit_answer"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>質問3</FormLabel>

@@ -8,7 +8,7 @@ const Header = () => {
         <img src="imgs/Thor.png" className="size-14" alt="Thor_logo" />
         <div>
           <ul className="flex gap-2">
-            <li>
+            {/* <li>
               <Button variant="ghost" className="p-3">
                 Docs
               </Button>
@@ -17,11 +17,17 @@ const Header = () => {
               <Button variant="ghost" className="p-3">
                 Credit
               </Button>
-            </li>
+            </li> */}
             <li>
-              <Button variant="ghost" className="p-3">
-                <SiGithub />
-              </Button>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/273Do/Thor-Web-App-Backend"
+              >
+                <Button variant="ghost" className="p-3">
+                  <SiGithub />
+                </Button>
+              </a>
             </li>
           </ul>
         </div>

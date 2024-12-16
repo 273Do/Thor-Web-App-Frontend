@@ -40,31 +40,69 @@ const convertToHoursSleepRange = (bedTime: string, wakeTime: string) => {
 };
 
 // チャート表示に必要なデータを作成
-const createChartData = (data: EstimateDataType) => {
-  const sleepRangeData = data.map((item: SleepRangeDataType) => {
-    const { chart_bed_time, chart_wake_time } = convertToHoursSleepRange(
-      item.bed_time,
-      item.wake_time
-    );
-    return {
-      date: item.date,
-      就寝時刻: chart_bed_time.toString(),
-      起床時刻: chart_wake_time.toString(),
-      bed_time: item.bed_time,
-      wake_time: item.wake_time,
-      staying_up_late: item.staying_up_late,
-      data_count: item.data_count,
-    };
-  });
-  const sleepTimeData = data.map((item: SleepTimeDataType) => {
-    return {
-      date: item.date,
-      睡眠時間: convertToHours(item.sleep_time),
-      sleep_time: item.sleep_time,
-      staying_up_late: item.staying_up_late,
-      data_count: item.data_count,
-    };
-  });
+const createChartData = (data: EstimateDataType[]) => {
+  // const canCreate: boolean = true;
+
+  const sleepRangeData: SleepRangeDataType[] = data.map(
+    (item: EstimateDataType) => {
+      if (
+        item.bed_time === null ||
+        item.wake_time === null ||
+        item.sleep_time === null ||
+        item.staying_up_late === null
+      ) {
+        return {
+          date: item.date,
+          就寝時刻: "N/A",
+          起床時刻: "N/A",
+          bed_time: "00:00",
+          wake_time: "00:01",
+          staying_up_late: false,
+          data_count: item.data_count,
+        };
+      } else {
+        const { chart_bed_time, chart_wake_time } = convertToHoursSleepRange(
+          item.bed_time,
+          item.wake_time
+        );
+        return {
+          date: item.date,
+          就寝時刻: chart_bed_time.toString(),
+          起床時刻: chart_wake_time.toString(),
+          bed_time: item.bed_time,
+          wake_time: item.wake_time,
+          staying_up_late: item.staying_up_late,
+          data_count: item.data_count,
+        };
+      }
+    }
+  );
+  const sleepTimeData: SleepTimeDataType[] = data.map(
+    (item: EstimateDataType) => {
+      if (
+        item.bed_time === null ||
+        item.wake_time === null ||
+        item.sleep_time === null ||
+        item.staying_up_late === null
+      ) {
+        return {
+          date: item.date,
+          睡眠時間: "N/A",
+          sleep_time: "00:01",
+          staying_up_late: false,
+          data_count: item.data_count,
+        };
+      } else {
+        return {
+          date: item.date,
+          睡眠時間: convertToHours(item.sleep_time),
+          sleep_time: item.sleep_time,
+          staying_up_late: item.staying_up_late,
+          data_count: item.data_count,
+        };
+      }
+    }
+  );
   return { sleepRangeData, sleepTimeData };
 };
 

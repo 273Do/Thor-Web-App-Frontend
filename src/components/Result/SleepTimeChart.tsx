@@ -1,4 +1,4 @@
-import { CartesianGrid, XAxis, Line, LineChart } from "recharts";
+import { CartesianGrid, XAxis, Line, LineChart, TooltipProps } from "recharts";
 import {
   ChartConfig,
   ChartContainer,
@@ -8,6 +8,10 @@ import {
 import { SleepTimeDataType } from "./types";
 import { Card } from "../ui/card";
 import { Footprints, Sunrise } from "lucide-react";
+import {
+  NameType,
+  ValueType,
+} from "recharts/types/component/DefaultTooltipContent";
 
 const chartConfig: ChartConfig = {
   睡眠時間: {
@@ -15,7 +19,11 @@ const chartConfig: ChartConfig = {
   },
 };
 
-export default function SleepTimeChart({ data }: { data: SleepTimeDataType }) {
+export default function SleepTimeChart({
+  data,
+}: {
+  data: SleepTimeDataType[];
+}) {
   return (
     <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
       <LineChart
@@ -36,8 +44,7 @@ export default function SleepTimeChart({ data }: { data: SleepTimeDataType }) {
         />
         <ChartTooltip
           cursor={true}
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          content={({ payload }: { payload: any }) => {
+          content={({ payload }: TooltipProps<ValueType, NameType>) => {
             if (payload && payload.length) {
               const item = payload[0].payload;
               return (

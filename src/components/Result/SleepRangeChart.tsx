@@ -1,4 +1,4 @@
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, TooltipProps, XAxis } from "recharts";
 import {
   ChartConfig,
   ChartContainer,
@@ -7,6 +7,10 @@ import {
 import { SleepRangeDataType } from "./types";
 import { Card } from "../ui/card";
 import { Footprints, Sunrise } from "lucide-react";
+import {
+  NameType,
+  ValueType,
+} from "recharts/types/component/DefaultTooltipContent";
 
 const chartConfig: ChartConfig = {
   就寝時刻: {
@@ -17,7 +21,7 @@ const chartConfig: ChartConfig = {
   },
 };
 
-const SleepRangeChart = ({ data }: { data: SleepRangeDataType }) => {
+const SleepRangeChart = ({ data }: { data: SleepRangeDataType[] }) => {
   return (
     <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
       <BarChart
@@ -37,8 +41,7 @@ const SleepRangeChart = ({ data }: { data: SleepRangeDataType }) => {
           tickFormatter={(value: string) => value.slice(5, 10)}
         />
         <ChartTooltip
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          content={({ payload }: { payload: any }) => {
+          content={({ payload }: TooltipProps<ValueType, NameType>) => {
             if (payload && payload.length) {
               const item = payload[0].payload;
               return (
