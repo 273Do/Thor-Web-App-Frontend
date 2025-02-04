@@ -6,9 +6,13 @@ import Estimate from "./pages/Estimate";
 function App() {
   return (
     <>
-      <div className="h-14"></div>
-      <div className="m-20 flex justify-center">
-        <div className="bg-slate-600a flex w-[840px] max-w-6xl flex-col items-center">
+      {/* <div className="h-14"></div> */}
+      {/* <div className="m-20 flex justify-center"> */}
+      {/* <div className="bg-slate-600a flex w-[840px] max-w-6xl flex-col items-center"> */}
+      {/* DEBUG: モバイルアプリ用の表示画面 */}
+      <div className="flex h-screen items-center justify-center">
+        <div className="flex max-w-[370px] flex-col items-center">
+          {/* ==== */}
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<LP />} />

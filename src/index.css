@@ -108,3 +108,109 @@
     @apply bg-background text-foreground;
   }
 }
+
+.fb {
+  font-size: 16px;
+  line-height: 1.6;
+  border-radius: 8px;
+  overflow-wrap: break-word;
+}
+
+/* Headers */
+.fb h1 {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.fb h2 {
+  /* font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 4px; */
+}
+
+.fb h3 {
+  font-size: 1.25em;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+/* Paragraphs and Text */
+.fb p {
+  margin-bottom: 8px;
+}
+
+/* Links */
+.fb a {
+  color: #3182ce;
+  text-decoration: none;
+}
+
+.fb a:hover {
+  text-decoration: underline;
+}
+
+/* Code blocks */
+.fb pre {
+  border: 1px solid hsl(var(--muted-foreground));
+  background: #09090b;
+  color: #fafafa;
+  border-radius: 0.5rem;
+  padding: 12px;
+  overflow-x: auto;
+  font-family: "Courier New", Courier, monospace;
+  margin-bottom: 8px;
+}
+
+.fb code {
+  border-radius: 4px;
+  padding: 2px 4px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.95em;
+}
+
+/* Lists */
+.fb ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-bottom: 8px;
+}
+
+.fb ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+  margin-bottom: 8px;
+}
+
+.fb li {
+  margin-bottom: 8px;
+}
+
+/* Blockquotes */
+.fb blockquote {
+  border-left: 4px solid #3182ce;
+  padding-left: 12px;
+  margin-left: 0;
+  color: #4a5568;
+
+  font-style: italic;
+}
+
+/* Tables */
+.fb table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 8px;
+}
+
+.fb th,
+.fb td {
+  border: 1px solid hsl(var(--primary));
+  padding: 8px;
+  text-align: left;
+}
+
+.fb th {
+  border: 1px solid hsl(var(--primary));
+  font-weight: bold;
+}
