@@ -51,8 +51,8 @@ const FECarousel = ({ data }: { data: NativeData }) => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          {/* <CarouselPrevious />
-          <CarouselNext /> */}
+          <CarouselPrevious className="ml-14 mt-[165px]" />
+          <CarouselNext className="mr-14 mt-[165px]" />
           <div className="flex items-center justify-center gap-2 pt-2 text-center text-sm text-muted-foreground">
             <ReactMarkdown className="fb">{titles[current - 1]}</ReactMarkdown>
             <p>

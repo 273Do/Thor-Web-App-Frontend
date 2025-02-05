@@ -51,7 +51,6 @@ const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
   return (
     <>
       <Card className="max-w-[370px]">
-        <div className="h-px w-full bg-border"></div>
         {/* <ResizablePanelGroup direction="horizontal">
           <ResizablePanel defaultSize={25}>
             <div className="m-6">

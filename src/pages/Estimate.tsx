@@ -10,6 +10,7 @@ import { Suspense, useState } from "react";
 import { z } from "zod";
 
 import { test_data } from "../functions/analysis/test_data/demo";
+import LoadingArea from "@/components/Result/NativeApp/LoadingArea";
 
 // bed_answerの項目を定義
 const bed_answer = [
@@ -48,7 +49,8 @@ const Estimate = () => {
 
   return (
     <Layout.Title title={""}>
-      <Feedback estimate_data={test_data} />
+      {/* <Feedback estimate_data={test_data} /> */}
+      <LoadingArea />
     </Layout.Title>
   );
 
