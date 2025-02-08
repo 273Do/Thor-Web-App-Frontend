@@ -18,8 +18,8 @@ const LoadingArea = () => {
           </div>
         </CardContent>
         <div className="h-px w-full bg-border"></div>
-        <CardTitle className="flex items-center justify-between p-6 pb-3 text-xl">
-          <p>睡眠時間チャート</p>
+        <CardTitle className="flex items-center justify-between p-6 pb-0 text-xl">
+          睡眠時間チャート
           <Button variant="ghost" className="p-3">
             <ArrowRightLeft />
           </Button>

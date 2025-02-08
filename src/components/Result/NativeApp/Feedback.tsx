@@ -51,48 +51,14 @@ const Feedback = ({ estimate_data }: { estimate_data: ResultType }) => {
   return (
     <>
       <Card className="max-w-[370px]">
-        {/* <ResizablePanelGroup direction="horizontal">
-          <ResizablePanel defaultSize={25}>
-            <div className="m-6">
-              {data.formattedData.map((item_s, i) => (
-                <div key={i}>
-                  <div className="m-1 text-xs text-muted-foreground">
-                    {item_s.section}
-                  </div>
-                  {item_s.content.map((item_t, j) => (
-                    <div key={j}>
-                      <Button
-                        variant="ghost"
-                        className={`${
-                          selectedTitle === item_t.title
-                            ? "bg-primary-gradient text-white hover:text-white"
-                            : ""
-                        } m-1`}
-                        onClick={() => setSelectedTitle(item_t.title)}
-                      >
-                        {item_t.title}
-                      </Button>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </ResizablePanel>
-          <ResizableHandle withHandle />
-          <ResizablePanel>
-            <p className="m-6 mb-3 text-xl font-bold">{selectedTitle}</p>
-            <div className="m-6 mt-3">{content}</div>
-          </ResizablePanel>
-        </ResizablePanelGroup> */}
         <CardTitle className="p-6 pb-3 text-xl">フィードバック</CardTitle>
         <FECarousel data={data} />
         <div className="h-px w-full bg-border"></div>
-        <CardTitle className="flex items-center justify-between p-6 pb-3 text-xl">
-          <p>
-            {isSleepRangeChart === true
-              ? "就寝・起床時刻チャート"
-              : "睡眠時間チャート"}
-          </p>
+        <CardTitle className="flex items-center justify-between p-6 pb-0 text-xl">
+          {isSleepRangeChart === true
+            ? "就寝・起床時刻チャート"
+            : "睡眠時間チャート"}
+
           <Button
             variant="ghost"
             className="p-3"

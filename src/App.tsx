@@ -15,8 +15,8 @@ function App() {
           {/* ==== */}
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<LP />} />
-              <Route path="/estimate" element={<Estimate />} />
+              {/* <Route path="/" element={<LP />} /> */}
+              <Route path="/" element={<Estimate />} />
             </Routes>
           </BrowserRouter>
         </div>

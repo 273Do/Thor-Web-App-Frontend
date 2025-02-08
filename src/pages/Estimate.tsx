@@ -49,8 +49,8 @@ const Estimate = () => {
 
   return (
     <Layout.Title title={""}>
-      {/* <Feedback estimate_data={test_data} /> */}
-      <LoadingArea />
+      <Feedback estimate_data={test_data} />
+      {/* <LoadingArea /> */}
     </Layout.Title>
   );
 
