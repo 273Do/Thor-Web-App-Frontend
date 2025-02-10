@@ -1,8 +1,7 @@
-import * as Analysis from "@/components/Analysis/index";
 import { formSchema } from "@/components/Analysis/types";
 import LoadingPage from "@/components/Loading/LoadingPage";
 import Feedback from "@/components/Result/NativeApp/Feedback";
-import ResultPage from "@/components/Result/ResultPage";
+import ResultPage from "@/components/Result/NativeApp/ResultPage";
 import { ResultType } from "@/components/Result/types";
 import * as Layout from "@/components/layouts/index";
 import { postAnalysisProcess } from "@/functions/analysis/main";
@@ -11,6 +10,7 @@ import { z } from "zod";
 
 import { test_data } from "../functions/analysis/test_data/demo";
 import LoadingArea from "@/components/Result/NativeApp/LoadingArea";
+import AnalysisForm from "@/components/Result/NativeApp/AnalysisForm";
 
 // bed_answerの項目を定義
 const bed_answer = [
@@ -47,35 +47,40 @@ const Estimate = () => {
 
   // DEBUG: モバイルアプリ用の表示画面テスト
 
-  return (
-    <Layout.Title title={""}>
-      <Feedback estimate_data={test_data} />
-      {/* <LoadingArea /> */}
-    </Layout.Title>
-  );
+  // return (
+  //   <Layout.Title title={""}>
+  //     <Feedback estimate_data={test_data} />
+  //     <LoadingArea />
+  //     <AnalysisForm
+  //         onSubmit={onSubmit}
+  //         bed_answer={bed_answer}
+  //         wake_answer={wake_answer}
+  //       />
+  //   </Layout.Title>
+  // );
 
   // DEBUG: あとでモバイル表示用に置き換える
-  // if (resource) {
-  //   return (
-  //     <Suspense fallback={<LoadingPage />}>
-  //       <ResultPage resource={resource} />
-  //     </Suspense>
-  //   );
-  // } else
-  //   return (
-  //     <>
-  //       <Layout.Title title={"アクティビティデータから睡眠状態を推定します。"}>
-  //         <Analysis.Title />
-  //       </Layout.Title>
-  //       <Layout.Content>
-  //         <Analysis.Form
-  //           onSubmit={onSubmit}
-  //           bed_answer={bed_answer}
-  //           wake_answer={wake_answer}
-  //         />
-  //       </Layout.Content>
-  //     </>
-  //   );
+  if (resource) {
+    return (
+      <Suspense fallback={<LoadingArea />}>
+        <ResultPage resource={resource} />
+      </Suspense>
+    );
+  } else
+    return (
+      <>
+        {/* <Layout.Title title={"アクティビティデータから睡眠状態を推定します。"}>
+          <Analysis.Title />
+        </Layout.Title>
+        <Layout.Content> */}
+        <AnalysisForm
+          onSubmit={onSubmit}
+          bed_answer={bed_answer}
+          wake_answer={wake_answer}
+        />
+        {/* </Layout.Content> */}
+      </>
+    );
 };
 
 export default Estimate;
