@@ -1,14 +1,14 @@
 import { formSchema } from "@/components/Analysis/types";
-import LoadingPage from "@/components/Loading/LoadingPage";
-import Feedback from "@/components/Result/NativeApp/Feedback";
+// import LoadingPage from "@/components/Loading/LoadingPage";
+// import Feedback from "@/components/Result/NativeApp/Feedback";
 import ResultPage from "@/components/Result/NativeApp/ResultPage";
 import { ResultType } from "@/components/Result/types";
-import * as Layout from "@/components/layouts/index";
+// import * as Layout from "@/components/layouts/index";
 import { postAnalysisProcess } from "@/functions/analysis/main";
 import { Suspense, useState } from "react";
 import { z } from "zod";
 
-import { test_data } from "../functions/analysis/test_data/demo";
+// import { test_data } from "../functions/analysis/test_data/demo";
 import LoadingArea from "@/components/Result/NativeApp/LoadingArea";
 import AnalysisForm from "@/components/Result/NativeApp/AnalysisForm";
 

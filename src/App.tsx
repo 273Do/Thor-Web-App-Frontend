@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LP from "./pages/LP";
+// import LP from "./pages/LP";
 import Estimate from "./pages/Estimate";
 
 function App() {
