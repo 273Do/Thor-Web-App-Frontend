@@ -40,6 +40,7 @@ export default function SleepTimeChart({
           tickLine={false}
           axisLine={false}
           tickMargin={8}
+          padding={{ left: 21, right: 21 }}
           tickFormatter={(value: string) => value.slice(5, 10)}
         />
         <ChartTooltip

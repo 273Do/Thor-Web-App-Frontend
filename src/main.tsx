@@ -8,9 +8,10 @@ import { ThemeProvider } from "@/components/theme-provider";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-      <Layout.Header />
+      {/* DEBUG: モバイルアプリ用の表示画面なのでレイアウトは不要 */}
+      {/* <Layout.Header /> */}
       <App />
-      <Layout.Footer />
+      {/* <Layout.Footer /> */}
     </ThemeProvider>
   </StrictMode>
 );
